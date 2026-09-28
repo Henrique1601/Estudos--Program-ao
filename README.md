@@ -40,6 +40,7 @@ Isso abrirá o menu interativo com todas as ferramentas disponíveis.
 | Comando | O que faz |
 | :--- | :--- |
 | `python main.py watch` | **Modo Observador Ativo**: monitora o código, retesta ao salvar e faz Git Auto-Commit ao passar. |
+| `python main.py hunt` | **Caça-Bugs**: treino de Code Review Reverso (encontrar a linha do bug lendo o código). |
 | `python main.py hint [ex] [1..3]` | **Dicas Progressivas**: Nível 1 (Pergunta), Nível 2 (Pseudocódigo), Nível 3 (Doc da API). |
 | `python main.py trace` | **Blind Trace**: flashcards mentais no terminal para prever o output antes de rodar. |
 | `python main.py boss` | **Boss Fights**: avalia e executa os mini-projetos práticos de marco. |

@@ -27,6 +27,7 @@ Explore os módulos do seu cérebro de estudos:
 ### 1. Filosofia & Metodologia
 - [[Como-Estudar-Sem-IA]]: Por que IA gera a ilusão de fluência e como treinar seu cérebro com *luta produtiva*.
 - [[Metodologia-Pato-Socratico]]: O algoritmo de 5 etapas para nunca mais ficar travado em um bug.
+- [[Guia-do-Caca-Bugs]]: Treino de leitura analítica linha por linha e Code Review Reverso.
 - [[Guia-do-DevLog]]: Metacognição na prática — registrando o que você assumiu errado vs como o runtime realmente opera.
 
 ### 2. Roteiro Passo a Passo
@@ -44,6 +45,7 @@ Explore os módulos do seu cérebro de estudos:
 | :--- | :--- | :--- |
 | `python main.py` | Menu interativo completo | Ponto de partida |
 | `python main.py watch` | Monitoramento em tempo real + Auto-commit | Ao codificar no editor |
+| `python main.py hunt` | Caça-Bugs (Code Review Reverso) | Treinar leitura e achar erros alheios |
 | `python main.py duck` | Sessão com o Pato Socrático | Travou em um erro |
 | `python main.py trace` | Blind Trace (compilador mental) | Treinar previsão de código |
 | `python main.py hint [ex] [1..3]` | Dica progressiva socrática | Precisa de luz sem ver código |

@@ -7,6 +7,7 @@ from sensei import runner
 from sensei import journal
 from sensei import hints
 from sensei import tracer
+from sensei import hunt
 
 
 def show_banner():
@@ -92,13 +93,14 @@ def interactive_menu():
         print(f" {bold(cyan('2.'))} 🥋 {bold('Katas Runner')} - Verificar os exercícios")
         print(f" {bold(cyan('3.'))} 👁️ {bold('Modo Watch')} - Monitorar exercícios em tempo real (com Auto-Commit)")
         print(f" {bold(cyan('4.'))} 🧠 {bold('Blind Trace')} - Treinar compilador mental (prever output sem rodar)")
-        print(f" {bold(cyan('5.'))} 👹 {bold('Boss Fights')} - Mini-projetos marcos de arquitetura")
-        print(f" {bold(cyan('6.'))} 💡 {bold('Pedir Dica')} - Dicas em 3 níveis sem código pronto")
-        print(f" {bold(cyan('7.'))} 📝 {bold('Novo DevLog')} - Registrar um erro e o que aprendeu")
-        print(f" {bold(cyan('8.'))} 📚 {bold('Ver DevLogs')} - Listar seus aprendizados salvos")
-        print(f" {bold(cyan('9.'))} 📊 {bold('Estatísticas')} - Ver seu progresso")
+        print(f" {bold(cyan('5.'))} 🔍 {bold('Caça-Bugs')} - Code review reverso (achar o bug lendo o código)")
+        print(f" {bold(cyan('6.'))} 👹 {bold('Boss Fights')} - Mini-projetos marcos de arquitetura")
+        print(f" {bold(cyan('7.'))} 💡 {bold('Pedir Dica')} - Dicas em 3 níveis sem código pronto")
+        print(f" {bold(cyan('8.'))} 📝 {bold('Novo DevLog')} - Registrar um erro e o que aprendeu")
+        print(f" {bold(cyan('9.'))} 📚 {bold('Ver DevLogs')} - Listar seus aprendizados salvos")
+        print(f" {bold(cyan('0.'))} 📊 {bold('Estatísticas')} - Ver seu progresso")
         print(f" {bold(cyan('T.'))} 🔄 {bold('Trocar Trilha')} - Alternar entre JS/TS/Node e Python")
-        print(f" {bold(cyan('0.'))} ❌ {dim('Sair')}\n")
+        print(f" {bold(cyan('Q.'))} ❌ {dim('Sair')}\n")
 
         choice = input(bold("Opção > ")).strip()
 
@@ -111,8 +113,10 @@ def interactive_menu():
         elif choice == "4":
             tracer.start_trace_session()
         elif choice == "5":
-            run_boss_checks()
+            hunt.start_hunt_session()
         elif choice == "6":
+            run_boss_checks()
+        elif choice == "7":
             ex_name = input(bold("Nome do exercício (ou ENTER para atual pendente): ")).strip()
             if not ex_name:
                 _, failed = runner.check_progress()
@@ -120,15 +124,15 @@ def interactive_menu():
             lvl_str = input(bold("Nível da dica (1=Pergunta, 2=Pseudocódigo, 3=Doc): ")).strip()
             lvl = int(lvl_str) if lvl_str.isdigit() else 1
             print(hints.get_hint(ex_name, lvl))
-        elif choice == "7":
-            journal.create_entry_interactive()
         elif choice == "8":
-            journal.show_summary()
+            journal.create_entry_interactive()
         elif choice == "9":
+            journal.show_summary()
+        elif choice == "0":
             show_stats()
         elif choice.lower() in ("t", "trocar", "track"):
             switch_track_interactive()
-        elif choice in ("0", "sair", "exit", "q"):
+        elif choice.lower() in ("q", "sair", "exit"):
             print(dim("\nAté a próxima sessão de código! Continue praticando."))
             break
         else:
@@ -152,6 +156,7 @@ def main():
     subparsers.add_parser("train", help="Executa verificação dos Katas")
     subparsers.add_parser("watch", help="Modo observador em tempo real dos exercícios com Git Auto-commit")
     subparsers.add_parser("trace", help="Modo Blind Trace (flashcards mentais de código)")
+    subparsers.add_parser("hunt", help="Modo Caça-Bugs (Code Review Reverso)")
     subparsers.add_parser("boss", help="Verifica e executa os Boss Fights")
     subparsers.add_parser("log", help="Cria nova entrada no DevLog")
     subparsers.add_parser("logs", help="Lista entradas do DevLog")
@@ -177,6 +182,8 @@ def main():
         runner.watch_mode()
     elif args.command == "trace":
         tracer.start_trace_session()
+    elif args.command == "hunt":
+        hunt.start_hunt_session()
     elif args.command == "boss":
         run_boss_checks()
     elif args.command == "hint":

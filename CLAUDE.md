@@ -23,6 +23,7 @@ python main.py watch            # Active watch mode with Git Auto-Commit
 python main.py train            # Run katas check (stops at first failing exercise)
 python main.py hint [ex] [1..3] # Get Socratic hint (1=question, 2=pseudocode, 3=api doc)
 python main.py trace            # Run Blind Trace mental compiler flashcards
+python main.py hunt             # Run Caça-Bugs reverse code review challenges
 python main.py boss             # Run and evaluate Boss Fights
 python main.py duck             # Run Socratic Duck 5-stage debugging session
 python main.py log              # Create DevLog entry
