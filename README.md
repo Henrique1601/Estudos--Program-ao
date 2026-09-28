@@ -1,136 +1,114 @@
 # 🥋 Code Sensei: Seu Mentor Pessoal de Programação Anti-IA
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node.js](https://img.shields.io/badge/Node.js-24%2B-green.svg)](https://nodejs.org/)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://python.org/)
+[![Obsidian Brain](https://img.shields.io/badge/Obsidian-Vault-purple.svg)](brain/INDEX.md)
+
 > **Aprenda a programar de verdade criando modelos mentais sólidos, sem atalhos de inteligência artificial ou ilusão de fluência.**
 
-O **Code Sensei** é uma ferramenta de terminal leve, rápida e offline projetada para quem quer aprender a programar construindo autonomia e disciplina técnica.
+O **Code Sensei** é um ecossistema offline de terminal projetado para quem quer construir autonomia técnica real através de **prática deliberada**, **TDD progressivo** e **metacognição**.
 
 ---
 
 ## 🎯 Por que aprender sem IA?
-Estudos mostram que o autocompletion e a geração indiscriminada de código criam a **"ilusão de fluência"**: você lê o código gerado, acha que entendeu, mas seu cérebro não construiu os caminhos neurais para depurar, rastrear variáveis ou sintetizar lógica do zero.
+Estudos empíricos em Educação em Computação mostram que o autocompletion indiscriminado cria a chamada **"ilusão de fluência"**: você lê o código gerado pela IA e acha que aprendeu, mas seu cérebro não constrói o modelo mental (*Notional Machine*) necessário para sintetizar ou depurar lógica a partir do zero.
 
-O Code Sensei atua como seu treinador rigoroso:
+O Code Sensei atua como seu treinador pessoal:
 1. **Zero código mastigado**: ele nunca cospe a solução pronta.
-2. **Depuração ativa**: força você a inspecionar estado real com prints/debugger.
-3. **Metacognição**: registra o que você presumiu errado vs como o runtime realmente funciona.
-
----
-
-## 🥋 Trilhas Disponíveis
-
-O Code Sensei possui suporte nativo a testes rápidos em duas trilhas completas:
-1. **JavaScript / TypeScript / Node.js** (Padrão - usa Node.js 24 com `node --test` e type-stripping nativo de TypeScript, sem necessidade de compilação ou dependências externas).
-2. **Python** (Usa runner nativo com `unittest`).
-
-Você pode alternar entre as trilhas a qualquer momento pelo menu interativo (`Opção 7`) ou via linha de comando:
-```bash
-python main.py --track js_ts
-python main.py --track python
-```
+2. **Anti-Cheat Linter**: bloqueia o uso de métodos mágicos quando o objetivo é treinar lógica manual.
+3. **Depuração Socrática**: conduz você com perguntas investigativas baseadas em fatos.
+4. **Compilador Mental (Blind Trace)**: treina a simulação mental do runtime antes de executar.
+5. **Git Auto-Commit**: salva e commita cada nível vencido automaticamente no seu histórico.
+6. **Segundo Cérebro Obsidian**: base de conhecimento completa em `brain/` com Wikilinks e mapas de competência.
 
 ---
 
 ## 🚀 Como Usar
 
 ### 1. Menu Interativo Principal
-Basta rodar o comando abaixo no terminal da pasta do projeto:
+Execute no terminal:
 ```bash
 python main.py
 ```
-Isso abrirá um menu interativo com todas as opções numeradas.
+Isso abrirá o menu interativo com todas as ferramentas disponíveis.
 
 ---
 
 ### 2. Comandos Diretos no Terminal
 
-#### 🦆 Pato Socrático (`python main.py duck`)
-Travou em um bug? Em vez de jogar o erro no ChatGPT, inicie uma sessão com o Pato Socrático. Ele conduzirá você por 5 etapas de raciocínio investigativo:
-1. Delimitar a discrepância (Entrada vs Saída esperada vs Real).
-2. Isolar a linha exata onde o estado divergiu.
-3. Inspecionar variáveis e tipos reais antes da linha.
-4. Traduzir o objetivo em português claro.
-5. Formular uma hipótese e um teste de 1 linha.
-*(Ao final, você pode salvar a análise diretamente no seu diário).*
-
-#### 👁️ Modo Watch dos Exercícios (`python main.py watch`)
-Monitora os exercícios em tempo real:
-- Deixe o terminal aberto com `python main.py watch`.
-- Abra o arquivo indicado (ex: `exercises/js_ts/01_js_primitives_coercion/exercise.ts`) no seu editor favorito (com sugestões de IA desligadas!).
-- Escreva a solução e salve o arquivo (`Ctrl+S`).
-- O Sensei retesta instantaneamente e avisa se passou ou mostra onde falhou, junto com a documentação oficial.
-
-#### 🥋 Verificador de Katas (`python main.py train`)
-Executa uma passada nos exercícios para verificar o status atual e o próximo exercício bloqueado.
-
-#### 📝 Diário Metacognitivo DevLog (`python main.py log` e `python main.py logs`)
-Quando resolver um bug difícil, registre seu aprendizado:
-- `python main.py log`: formulário guiado para registrar a falsa premissa vs a causa real.
-- `python main.py logs`: lista todo o seu histórico de aprendizados salvos na pasta `devlog/`.
-
-#### 📊 Estatísticas (`python main.py stats`)
-Mostra seu progresso geral de katas concluídos e total de lições registradas.
+| Comando | O que faz |
+| :--- | :--- |
+| `python main.py watch` | **Modo Observador Ativo**: monitora o código, retesta ao salvar e faz Git Auto-Commit ao passar. |
+| `python main.py hint [ex] [1..3]` | **Dicas Progressivas**: Nível 1 (Pergunta), Nível 2 (Pseudocódigo), Nível 3 (Doc da API). |
+| `python main.py trace` | **Blind Trace**: flashcards mentais no terminal para prever o output antes de rodar. |
+| `python main.py boss` | **Boss Fights**: avalia e executa os mini-projetos práticos de marco. |
+| `python main.py duck` | **Pato Socrático**: sessão de 5 etapas para debugar problemas difíceis. |
+| `python main.py train` | **Katas Runner**: executa a suíte e para no primeiro exercício pendente. |
+| `python main.py log` | **Novo DevLog**: formulário guiado para registrar a falsa premissa vs a causa real do bug. |
+| `python main.py logs` | **Ver DevLogs**: lista seus aprendizados e modelos mentais salvos. |
+| `python main.py stats` | **Estatísticas**: mostra porcentagem de katas e chefões concluídos. |
+| `python main.py --track js_ts` | Ativa a trilha **JavaScript / TypeScript / Node.js**. |
+| `python main.py --track python` | Ativa a trilha **Python**. |
 
 ---
 
-## 📂 Estrutura de Exercícios
+## 📂 Suíte de 20 Katas Progressivos (`exercises/js_ts/`)
 
-### Trilha JavaScript / TypeScript / Node.js (`exercises/js_ts/`)
-- `01_primitives_coercion`: Valores falsy, coerção de tipos e formatação de moeda.
-- `02_conditionals_branching`: Classificação de notas, anos bissextos e cálculo de descontos.
-- `03_loops_accumulators`: Acumuladores de pares, contagem de caracteres e fatorial manual.
-- `04_array_basics`: Busca de extremos (min/max) e divisão de arrays em fatias (chunking).
-- `05_functions_closures`: Estado encapsulado com closures e memoização funcional.
-- `06_objects_destructuring`: Seleção de chaves (Pick) e merge seguro com spread.
-- `07_ts_basic_interfaces`: Modelagem de e-commerce e recibos com interfaces estritas.
-- `08_ts_unions_narrowing`: Unions discriminadas e inferência de tipos polimórficos.
-- `09_array_methods_map_filter`: Transformações funcionais e descarte de falsy values.
-- `10_array_methods_reduce`: Agrupamento de dados e histogramas com reduce.
-- `11_sets_and_maps`: Interseção O(1) com Set e tabelas de busca com Map.
-- `12_error_handling_custom`: Classes de erro customizadas e parsing seguro de JSON.
-- `13_ts_generics`: Estrutura de dados Fila (FIFO) e tipos genéricos reutilizáveis.
-- `14_async_promises_basics`: Envelopamento de temporizadores e Promise.race com timeout.
-- `15_async_await_flow`: Execução assíncrona sequencial e retentativas automáticas (retries).
-- `16_async_concurrency_limit`: Controle de concorrência com pool de workers assíncronos.
-- `17_node_path_fs`: Manipulação atômica de JSON com `node:fs/promises` e `node:path`.
-- `18_node_events_streams`: Arquitetura orientada a eventos com `EventEmitter`.
-- `19_mental_trace_real_bugs`: Caça aos 3 bugs clássicos (`.sort()`, shallow copy, async forEach).
-- `20_lru_cache_algorithm`: Implementação de Cache LRU (Least Recently Used) com Map em O(1).
-
-### Trilha Python (`exercises/python/`)
-- `01_variables_types`: Tipos, tuplas e conversão numérica.
-- `02_conditionals_logic`: Ano bissexto, classificação geométrica e guard clauses.
-- `03_loops_accumulators`: Laços manuais e acumuladores.
-- `04_functions_pure`: Funções puras e remoção de duplicados preservando ordem.
-- `05_data_structures_maps`: Dicionários e contagem de frequência.
-- `06_mental_trace_bug`: Armadilhas de runtime (default mutável `[]` e off-by-one).
+1. `01_primitives_coercion`: Valores falsy, coerção de tipos e formatação de moeda BRL.
+2. `02_conditionals_branching`: Classificação de notas, anos bissextos e cálculo de descontos.
+3. `03_loops_accumulators`: Acumuladores de pares, contagem de caracteres e fatorial manual.
+4. `04_array_basics`: Busca de extremos (min/max sem Math.max) e fatiamento em lotes (chunking).
+5. `05_functions_closures`: Estado encapsulado com closures e memoização funcional.
+6. `06_objects_destructuring`: Projeção de chaves (Pick) e merge seguro com spread.
+7. `07_ts_basic_interfaces`: Modelagem de e-commerce e recibos com interfaces estritas.
+8. `08_ts_unions_narrowing`: Unions discriminadas e inferência de tipos polimórficos.
+9. `09_array_methods_map_filter`: Transformações funcionais puras e descarte de falsy values.
+10. `10_array_methods_reduce`: Agrupamento de dados e histogramas com reduce.
+11. `11_sets_and_maps`: Interseção O(1) com Set e tabelas de busca com Map.
+12. `12_error_handling_custom`: Classes de erro customizadas e parsing seguro de JSON.
+13. `13_ts_generics`: Estrutura de dados Fila (FIFO) e tipos genéricos reutilizáveis.
+14. `14_async_promises_basics`: Envelopamento de temporizadores e Promise.race com timeout.
+15. `15_async_await_flow`: Execução assíncrona sequencial e retentativas automáticas (retries).
+16. `16_async_concurrency_limit`: Controle de concorrência com pool de workers assíncronos.
+17. `17_node_path_fs`: Manipulação atômica de JSON com `node:fs/promises` e `node:path`.
+18. `18_node_events_streams`: Arquitetura orientada a eventos com `EventEmitter`.
+19. `19_mental_trace_real_bugs`: Caça aos 3 bugs clássicos (`.sort()` numérico, shallow copy, async forEach).
+20. `20_lru_cache_algorithm`: Implementação de Cache LRU (Least Recently Used) com Map em O(1).
 
 ---
 
-## 📂 Estrutura de Arquivos
+## 👹 Boss Fights (Marcos Práticos de Projeto)
 
-```text
-charming-shannon/
-├── exercises/                     # Exercícios práticos progressivos
-│   ├── 01_variables_types/       # Variáveis, tipos e operações
-│   ├── 02_conditionals_logic/    # Lógica booleana e guard clauses
-│   ├── 03_loops_accumulators/    # Laços e acumuladores manuais
-│   ├── 04_functions_pure/        # Funções puras e mutabilidade
-│   ├── 05_data_structures_maps/  # Dicionários e agrupamentos
-│   └── 06_mental_trace_bug/      # Caça a bugs reais (default mutável, off-by-one)
-├── sensei/                        # Motor do mentor
-│   ├── cli.py                    # Menu e comandos CLI
-│   ├── socratic.py               # Sessão do Pato Socrático
-│   ├── runner.py                 # Validador de testes e observador de arquivos
-│   ├── journal.py                # Diário DevLog metacognitivo
-│   └── colors.py                 # Formatação de terminal
-├── devlog/                        # Seus aprendizados salvos em Markdown
-└── main.py                        # Ponto de entrada do sistema
-```
+A cada 5 níveis, você encara um mini-projeto de arquitetura:
+- **Boss 1 (Nível 5)**: `boss_01_cli_task_manager` — Gerenciador de Tarefas em Memória com buscas e filtros.
+- **Boss 2 (Nível 10)**: `boss_02_csv_financial_analyzer` — Analisador analítico de extratos bancários em CSV.
+- **Boss 3 (Nível 15)**: `boss_03_resilient_api_crawler` — Crawler serial assíncrono com retries e timeouts.
+- **Boss 4 (Nível 20 - Chefão Final)**: `boss_04_in_memory_kv_store` — Mini Banco Chave-Valor em disco com Cache LRU e Eventos.
 
 ---
 
-## 💡 Dica de Ouro para o Aprendizado
-No seu editor de código (VS Code, Cursor, etc.):
-- **Desative extensões de Copilot/autocompletion por IA**.
-- Use o terminal integrado lado a lado com seu código.
-- Consulte a documentação oficial indicada nos links de cada exercício.
+## 🧠 Segundo Cérebro Obsidian (`brain/`)
+
+O repositório inclui um cofre Obsidian pronto para uso:
+- [INDEX.md](brain/INDEX.md): Ponto de entrada central (Map of Content).
+- [Como-Estudar-Sem-IA.md](brain/Como-Estudar-Sem-IA.md): A neurociência do aprendizado e a ilusão de fluência.
+- [Mapa-de-Niveis.md](brain/Mapa-de-Niveis.md): Guia detalhado de todos os 20 níveis e competências.
+- [Boss-Fights-Guia.md](brain/Boss-Fights-Guia.md): Requisitos arquiteturais dos 4 projetos práticos.
+- [Metodologia-Pato-Socratico.md](brain/Metodologia-Pato-Socratico.md): O algoritmo de 5 etapas para debugar.
+- [Arquitetura-Code-Sensei.md](brain/Arquitetura-Code-Sensei.md): Engenharia interna do runner e linter.
+- [Guia-do-DevLog.md](brain/Guia-do-DevLog.md): Como capturar discrepâncias de modelos mentais.
+
+---
+
+## 🤖 Agente Especialista (`code-sensei-mentor`)
+
+O projeto inclui a especificação do subagente em [agents/code-sensei-mentor.md](agents/code-sensei-mentor.md), focado exclusivamente em:
+- Conduzir tutorias socráticas.
+- Criar novos desafios personalizados.
+- Diagnosticar modelos mentais defeituosos sem nunca entregar código pronto.
+
+---
+
+## 📄 Licença
+Distribuído sob a licença **MIT**. Veja [LICENSE](LICENSE) para mais detalhes.

@@ -5,6 +5,8 @@ from sensei.colors import bold, green, red, yellow, cyan, dim, magenta
 from sensei import socratic
 from sensei import runner
 from sensei import journal
+from sensei import hints
+from sensei import tracer
 
 
 def show_banner():
@@ -25,11 +27,14 @@ def show_stats():
     passed, failed = runner.check_progress()
     total = len(passed) + len(failed)
     entries = journal.list_entries()
+    bosses = runner.get_boss_fights()
+    bosses_passed = [b for b in bosses if runner.run_exercise_test(b)[0]]
 
     print(bold("📊 RESUMO DE PROGRESSO:\n"))
     print(f"- Exercícios Concluídos : {green(str(len(passed)))} / {total}")
     print(f"- Exercícios Pendentes  : {yellow(str(len(failed)))} / {total}")
-    print(f"- Lições no DevLog      : {magenta(str(len(entries)))}")
+    print(f"- Boss Fights Vencidos  : {magenta(str(len(bosses_passed)))} / {len(bosses)}")
+    print(f"- Lições no DevLog      : {cyan(str(len(entries)))}")
 
     if total > 0:
         pct = (len(passed) / total) * 100
@@ -42,13 +47,32 @@ def show_stats():
         print(f"\nPróximo foco: {bold(yellow(failed[0].name))}")
         print(dim("Execute 'python main.py watch' para começar a resolver!"))
     else:
-        print(f"\n{bold(green('Todos os katas finalizados! Adicione novos ou pratique debug.'))}")
+        print(f"\n{bold(green('Todos os katas finalizados! Pratique os Boss Fights com python main.py boss.'))}")
+
+
+def run_boss_checks():
+    bosses = runner.get_boss_fights()
+    if not bosses:
+        print(yellow("Nenhum Boss Fight disponível nesta trilha."))
+        return
+
+    print("\n" + bold(magenta("=== 👹 BOSS FIGHTS (MARCOS DE PROJETO) 👹 ===")))
+    print(dim("Mini-projetos aplicados que testam arquitetura e raciocínio real.\n"))
+
+    for boss in bosses:
+        ok, output = runner.run_exercise_test(boss)
+        if ok:
+            print(f" {green('✔ DERROTADO')} {bold(boss.name)}")
+        else:
+            print(f" {red('✖ VIVO')}      {bold(boss.name)}")
+            print("\n" + runner.format_failure_message(boss, output))
+            break
 
 
 def switch_track_interactive():
     print("\n" + bold(cyan("=== SELECIONE A TRILHA DE ESTUDOS ===")))
-    print(f" 1. {bold('JavaScript / TypeScript / Node.js')}")
-    print(f" 2. {bold('Python')}")
+    print(f" 1. {bold('JavaScript / TypeScript / Node.js')} (20 Níveis + 4 Boss Fights)")
+    print(f" 2. {bold('Python')} (6 Níveis)")
     op = input(bold("\nEscolha a trilha (1 ou 2) > ")).strip()
     if op == "1":
         runner.set_current_track("js_ts")
@@ -66,11 +90,14 @@ def interactive_menu():
         print(bold("Escolha uma ação:\n"))
         print(f" {bold(cyan('1.'))} 🦆 {bold('Pato Socrático')} - Debugar um erro que está te travando")
         print(f" {bold(cyan('2.'))} 🥋 {bold('Katas Runner')} - Verificar os exercícios")
-        print(f" {bold(cyan('3.'))} 👁️ {bold('Modo Watch')} - Monitorar exercícios em tempo real enquanto digita")
-        print(f" {bold(cyan('4.'))} 📝 {bold('Novo DevLog')} - Registrar um erro e o que aprendeu")
-        print(f" {bold(cyan('5.'))} 📚 {bold('Ver DevLogs')} - Listar seus aprendizados salvos")
-        print(f" {bold(cyan('6.'))} 📊 {bold('Estatísticas')} - Ver seu progresso")
-        print(f" {bold(cyan('7.'))} 🔄 {bold('Trocar Trilha')} - Alternar entre JS/TS/Node e Python")
+        print(f" {bold(cyan('3.'))} 👁️ {bold('Modo Watch')} - Monitorar exercícios em tempo real (com Auto-Commit)")
+        print(f" {bold(cyan('4.'))} 🧠 {bold('Blind Trace')} - Treinar compilador mental (prever output sem rodar)")
+        print(f" {bold(cyan('5.'))} 👹 {bold('Boss Fights')} - Mini-projetos marcos de arquitetura")
+        print(f" {bold(cyan('6.'))} 💡 {bold('Pedir Dica')} - Dicas em 3 níveis sem código pronto")
+        print(f" {bold(cyan('7.'))} 📝 {bold('Novo DevLog')} - Registrar um erro e o que aprendeu")
+        print(f" {bold(cyan('8.'))} 📚 {bold('Ver DevLogs')} - Listar seus aprendizados salvos")
+        print(f" {bold(cyan('9.'))} 📊 {bold('Estatísticas')} - Ver seu progresso")
+        print(f" {bold(cyan('T.'))} 🔄 {bold('Trocar Trilha')} - Alternar entre JS/TS/Node e Python")
         print(f" {bold(cyan('0.'))} ❌ {dim('Sair')}\n")
 
         choice = input(bold("Opção > ")).strip()
@@ -82,12 +109,24 @@ def interactive_menu():
         elif choice == "3":
             runner.watch_mode()
         elif choice == "4":
-            journal.create_entry_interactive()
+            tracer.start_trace_session()
         elif choice == "5":
-            journal.show_summary()
+            run_boss_checks()
         elif choice == "6":
-            show_stats()
+            ex_name = input(bold("Nome do exercício (ou ENTER para atual pendente): ")).strip()
+            if not ex_name:
+                _, failed = runner.check_progress()
+                ex_name = failed[0].name if failed else "01_primitives_coercion"
+            lvl_str = input(bold("Nível da dica (1=Pergunta, 2=Pseudocódigo, 3=Doc): ")).strip()
+            lvl = int(lvl_str) if lvl_str.isdigit() else 1
+            print(hints.get_hint(ex_name, lvl))
         elif choice == "7":
+            journal.create_entry_interactive()
+        elif choice == "8":
+            journal.show_summary()
+        elif choice == "9":
+            show_stats()
+        elif choice.lower() in ("t", "trocar", "track"):
             switch_track_interactive()
         elif choice in ("0", "sair", "exit", "q"):
             print(dim("\nAté a próxima sessão de código! Continue praticando."))
@@ -111,10 +150,16 @@ def main():
 
     subparsers.add_parser("duck", help="Inicia sessão do Pato Socrático para debugar")
     subparsers.add_parser("train", help="Executa verificação dos Katas")
-    subparsers.add_parser("watch", help="Modo observador em tempo real dos exercícios")
+    subparsers.add_parser("watch", help="Modo observador em tempo real dos exercícios com Git Auto-commit")
+    subparsers.add_parser("trace", help="Modo Blind Trace (flashcards mentais de código)")
+    subparsers.add_parser("boss", help="Verifica e executa os Boss Fights")
     subparsers.add_parser("log", help="Cria nova entrada no DevLog")
     subparsers.add_parser("logs", help="Lista entradas do DevLog")
     subparsers.add_parser("stats", help="Exibe estatísticas de progresso")
+
+    hint_parser = subparsers.add_parser("hint", help="Obtém dica progressiva (1=Pergunta, 2=Estrutura, 3=Doc)")
+    hint_parser.add_argument("exercise", nargs="?", default="", help="Nome do exercício")
+    hint_parser.add_argument("level", nargs="?", type=int, default=1, help="Nível da dica (1, 2 ou 3)")
 
     args = parser.parse_args()
 
@@ -130,6 +175,16 @@ def main():
         runner.run_checks(stop_on_first=True)
     elif args.command == "watch":
         runner.watch_mode()
+    elif args.command == "trace":
+        tracer.start_trace_session()
+    elif args.command == "boss":
+        run_boss_checks()
+    elif args.command == "hint":
+        ex_name = args.exercise
+        if not ex_name:
+            _, failed = runner.check_progress()
+            ex_name = failed[0].name if failed else "01_primitives_coercion"
+        print(hints.get_hint(ex_name, args.level))
     elif args.command == "log":
         journal.create_entry_interactive()
     elif args.command == "logs":
