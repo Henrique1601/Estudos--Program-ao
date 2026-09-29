@@ -41,6 +41,9 @@ Isso abrirá o menu interativo com todas as ferramentas disponíveis.
 | :--- | :--- |
 | `python main.py watch` | **Modo Observador Ativo**: monitora o código, retesta ao salvar e faz Git Auto-Commit ao passar. |
 | `python main.py hunt` | **Caça-Bugs**: treino de Code Review Reverso (encontrar a linha do bug lendo o código). |
+| `python main.py error [msg]` | **Decodificador de Erros**: traduz mensagens crípticas do runtime em explicações humanas e checklists de debug. |
+| `python main.py inspect` | **Visualizador de Memória**: simula no terminal a evolução de variáveis em loops, recursão e ponteiros. |
+| `python main.py anki` | **Exportador Anki**: gera baralho `flashcards/code_sensei_anki.csv` com 20 modelos mentais fundamentais. |
 | `python main.py hint [ex] [1..3]` | **Dicas Progressivas**: Nível 1 (Pergunta), Nível 2 (Pseudocódigo), Nível 3 (Doc da API). |
 | `python main.py trace` | **Blind Trace**: flashcards mentais no terminal para prever o output antes de rodar. |
 | `python main.py boss` | **Boss Fights**: avalia e executa os mini-projetos práticos de marco. |
@@ -51,6 +54,7 @@ Isso abrirá o menu interativo com todas as ferramentas disponíveis.
 | `python main.py stats` | **Estatísticas**: mostra porcentagem de katas e chefões concluídos. |
 | `python main.py --track js_ts` | Ativa a trilha **JavaScript / TypeScript / Node.js**. |
 | `python main.py --track python` | Ativa a trilha **Python**. |
+
 
 ---
 
@@ -99,6 +103,7 @@ O repositório inclui um cofre Obsidian pronto para uso:
 - [Metodologia-Pato-Socratico.md](brain/Metodologia-Pato-Socratico.md): O algoritmo de 5 etapas para debugar.
 - [Arquitetura-Code-Sensei.md](brain/Arquitetura-Code-Sensei.md): Engenharia interna do runner e linter.
 - [Guia-do-DevLog.md](brain/Guia-do-DevLog.md): Como capturar discrepâncias de modelos mentais.
+- [Decodificador-de-Erros.md](brain/Decodificador-de-Erros.md): Guia de anatomia de erros do runtime e checklist de debug.
 
 ---
 

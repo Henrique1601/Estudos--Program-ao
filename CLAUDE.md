@@ -24,6 +24,9 @@ python main.py train            # Run katas check (stops at first failing exerci
 python main.py hint [ex] [1..3] # Get Socratic hint (1=question, 2=pseudocode, 3=api doc)
 python main.py trace            # Run Blind Trace mental compiler flashcards
 python main.py hunt             # Run Caça-Bugs reverse code review challenges
+python main.py error [msg]      # Decode cryptic terminal error messages into plain Portuguese
+python main.py inspect          # Interactive memory, call stack, and pointer visualizer
+python main.py anki             # Export 20 fundamental mental model flashcards to Anki CSV
 python main.py boss             # Run and evaluate Boss Fights
 python main.py duck             # Run Socratic Duck 5-stage debugging session
 python main.py log              # Create DevLog entry
@@ -55,9 +58,13 @@ charming-shannon/
 ├── README.md                  # Repository documentation and badges
 ├── main.py                    # Root entrypoint
 ├── sensei/                    # Core mentor engine
+│   ├── anki.py                # Anki CSV exporter with 20 mental model cards
 │   ├── cli.py                 # Menu and command-line parser
 │   ├── colors.py              # ANSI styling and Windows UTF-8 stdout setup
+│   ├── decoder.py             # Terminal error decrypter & debug checklists
 │   ├── hints.py               # 3-tier progressive hint database
+│   ├── hunt.py                # Caça-Bugs reverse code review engine
+│   ├── inspector.py           # Memory RAM, call stack & pointer visualizer
 │   ├── journal.py             # DevLog manager
 │   ├── linter.py              # Static anti-cheat analyzer
 │   ├── runner.py              # Test discovery, execution & git auto-commit
@@ -67,8 +74,9 @@ charming-shannon/
 │   ├── js_ts/                 # 20 Levels (01 to 20) in TypeScript
 │   │   └── boss_fights/       # 4 Milestone Boss Projects
 │   └── python/                # 6 Levels in Python
+├── flashcards/                # Generated Anki flashcard decks (.csv)
 ├── devlog/                    # User metacognitive reflections in Markdown
-└── brain/                     # Obsidian Vault (MOC, levels, methodology)
+└── brain/                     # Obsidian Vault (MOC, levels, errors, methodology)
 ```
 
 ---

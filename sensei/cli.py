@@ -8,6 +8,10 @@ from sensei import journal
 from sensei import hints
 from sensei import tracer
 from sensei import hunt
+from sensei import decoder
+from sensei import inspector
+from sensei import anki
+
 
 
 def show_banner():
@@ -95,9 +99,12 @@ def interactive_menu():
         print(f" {bold(cyan('4.'))} 🧠 {bold('Blind Trace')} - Treinar compilador mental (prever output sem rodar)")
         print(f" {bold(cyan('5.'))} 🔍 {bold('Caça-Bugs')} - Code review reverso (achar o bug lendo o código)")
         print(f" {bold(cyan('6.'))} 👹 {bold('Boss Fights')} - Mini-projetos marcos de arquitetura")
-        print(f" {bold(cyan('7.'))} 💡 {bold('Pedir Dica')} - Dicas em 3 níveis sem código pronto")
-        print(f" {bold(cyan('8.'))} 📝 {bold('Novo DevLog')} - Registrar um erro e o que aprendeu")
-        print(f" {bold(cyan('9.'))} 📚 {bold('Ver DevLogs')} - Listar seus aprendizados salvos")
+        print(f" {bold(cyan('7.'))} 🛠️ {bold('Decodificador')} - Traduzir erro críptico do terminal")
+        print(f" {bold(cyan('8.'))} 🔬 {bold('Inspetor de Memória')} - Visualizar loops, call stack e ponteiros")
+        print(f" {bold(cyan('9.'))} 📇 {bold('Exportar Anki')} - Gerar baralho de flashcards (.csv)")
+        print(f" {bold(cyan('10.'))} 💡 {bold('Pedir Dica')} - Dicas em 3 níveis sem código pronto")
+        print(f" {bold(cyan('11.'))} 📝 {bold('Novo DevLog')} - Registrar um erro e o que aprendeu")
+        print(f" {bold(cyan('12.'))} 📚 {bold('Ver DevLogs')} - Listar seus aprendizados salvos")
         print(f" {bold(cyan('0.'))} 📊 {bold('Estatísticas')} - Ver seu progresso")
         print(f" {bold(cyan('T.'))} 🔄 {bold('Trocar Trilha')} - Alternar entre JS/TS/Node e Python")
         print(f" {bold(cyan('Q.'))} ❌ {dim('Sair')}\n")
@@ -116,7 +123,13 @@ def interactive_menu():
             hunt.start_hunt_session()
         elif choice == "6":
             run_boss_checks()
-        elif choice == "7":
+        elif choice == "7" or choice.lower() in ("e", "erro", "error"):
+            decoder.start_decoder_session()
+        elif choice == "8" or choice.lower() in ("i", "inspect", "memoria"):
+            inspector.start_inspector_session()
+        elif choice == "9" or choice.lower() in ("a", "anki", "flashcards"):
+            anki.start_anki_export()
+        elif choice == "10":
             ex_name = input(bold("Nome do exercício (ou ENTER para atual pendente): ")).strip()
             if not ex_name:
                 _, failed = runner.check_progress()
@@ -124,9 +137,9 @@ def interactive_menu():
             lvl_str = input(bold("Nível da dica (1=Pergunta, 2=Pseudocódigo, 3=Doc): ")).strip()
             lvl = int(lvl_str) if lvl_str.isdigit() else 1
             print(hints.get_hint(ex_name, lvl))
-        elif choice == "8":
+        elif choice == "11":
             journal.create_entry_interactive()
-        elif choice == "9":
+        elif choice == "12":
             journal.show_summary()
         elif choice == "0":
             show_stats()
@@ -158,9 +171,14 @@ def main():
     subparsers.add_parser("trace", help="Modo Blind Trace (flashcards mentais de código)")
     subparsers.add_parser("hunt", help="Modo Caça-Bugs (Code Review Reverso)")
     subparsers.add_parser("boss", help="Verifica e executa os Boss Fights")
+    subparsers.add_parser("inspect", help="Visualizador de memória RAM e call stack")
+    subparsers.add_parser("anki", help="Exporta baralho Anki com 20 modelos mentais")
     subparsers.add_parser("log", help="Cria nova entrada no DevLog")
     subparsers.add_parser("logs", help="Lista entradas do DevLog")
     subparsers.add_parser("stats", help="Exibe estatísticas de progresso")
+
+    err_parser = subparsers.add_parser("error", help="Decodifica erro críptico do terminal")
+    err_parser.add_argument("message", nargs="*", default=[], help="Texto do erro para decodificar")
 
     hint_parser = subparsers.add_parser("hint", help="Obtém dica progressiva (1=Pergunta, 2=Estrutura, 3=Doc)")
     hint_parser.add_argument("exercise", nargs="?", default="", help="Nome do exercício")
@@ -186,6 +204,21 @@ def main():
         hunt.start_hunt_session()
     elif args.command == "boss":
         run_boss_checks()
+    elif args.command == "error":
+        if args.message:
+            msg = " ".join(args.message)
+            res = decoder.decode_error(msg)
+            if res:
+                decoder.show_decoded_result(res)
+            else:
+                print(yellow("Padrão não reconhecido automaticamente. Abrindo decodificador interativo..."))
+                decoder.start_decoder_session()
+        else:
+            decoder.start_decoder_session()
+    elif args.command == "inspect":
+        inspector.start_inspector_session()
+    elif args.command == "anki":
+        anki.start_anki_export()
     elif args.command == "hint":
         ex_name = args.exercise
         if not ex_name:
