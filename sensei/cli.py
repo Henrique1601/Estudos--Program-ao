@@ -11,6 +11,7 @@ from sensei import hunt
 from sensei import decoder
 from sensei import inspector
 from sensei import anki
+from sensei import gamification
 
 
 
@@ -29,30 +30,32 @@ def show_banner():
 
 def show_stats():
     show_banner()
-    passed, failed = runner.check_progress()
-    total = len(passed) + len(failed)
-    entries = journal.list_entries()
-    bosses = runner.get_boss_fights()
-    bosses_passed = [b for b in bosses if runner.run_exercise_test(b)[0]]
+    profile = gamification.calculate_player_profile()
+    rank = profile["rank"]
+    symbol = bold(cyan(rank["symbol"]) if rank["color"] == "cyan" else (green(rank["symbol"]) if rank["color"] == "green" else yellow(rank["symbol"])))
 
-    print(bold("📊 RESUMO DE PROGRESSO:\n"))
-    print(f"- Exercícios Concluídos : {green(str(len(passed)))} / {total}")
-    print(f"- Exercícios Pendentes  : {yellow(str(len(failed)))} / {total}")
-    print(f"- Boss Fights Vencidos  : {magenta(str(len(bosses_passed)))} / {len(bosses)}")
-    print(f"- Lições no DevLog      : {cyan(str(len(entries)))}")
+    print(bold("📊 PERFIL DO ALUNO & STATUS RPG:\n"))
+    print(f"- Graduação Atual       : {symbol} {bold(rank['name'])}")
+    print(f"- Experiência Acumulada : {bold(green(str(profile['xp']) + ' XP'))}")
+    print(f"- Sequência de Estudos  : {bold(yellow('🔥 ' + str(profile['current_streak']) + ' dias seguidos'))} (Recorde: {profile['longest_streak']} dias)")
+    print(f"- Katas Concluídos      : {green(str(profile['katas_done']))} / {profile['katas_total']}")
+    print(f"- Boss Fights Vencidos  : {magenta(str(profile['bosses_done']))} / {profile['bosses_total']}")
+    print(f"- Lições no DevLog      : {cyan(str(profile['devlogs_count']))}")
 
+    total = profile['katas_total']
     if total > 0:
-        pct = (len(passed) / total) * 100
+        pct = (profile['katas_done'] / total) * 100
         bar_len = 24
-        filled = int(bar_len * (len(passed) / total))
+        filled = int(bar_len * (profile['katas_done'] / total))
         bar = green("█" * filled) + dim("░" * (bar_len - filled))
         print(f"\nProgresso Katas: [{bar}] {pct:.1f}%")
 
-    if failed:
-        print(f"\nPróximo foco: {bold(yellow(failed[0].name))}")
-        print(dim("Execute 'python main.py watch' para começar a resolver!"))
+    if profile["next_target"]:
+        print(f"\nPróximo foco: {bold(yellow(profile['next_target']))}")
+        print(dim("Execute 'python main.py watch' para avançar na árvore!"))
     else:
         print(f"\n{bold(green('Todos os katas finalizados! Pratique os Boss Fights com python main.py boss.'))}")
+
 
 
 def run_boss_checks():
@@ -106,6 +109,7 @@ def interactive_menu():
         print(f" {bold(cyan('11.'))} 📝 {bold('Novo DevLog')} - Registrar um erro e o que aprendeu")
         print(f" {bold(cyan('12.'))} 📚 {bold('Ver DevLogs')} - Listar seus aprendizados salvos")
         print(f" {bold(cyan('0.'))} 📊 {bold('Estatísticas')} - Ver seu progresso")
+        print(f" {bold(cyan('R.'))} 🌳 {bold('Skill Tree RPG')} - Árvore de habilidades, faixas e streaks")
         print(f" {bold(cyan('T.'))} 🔄 {bold('Trocar Trilha')} - Alternar entre JS/TS/Node e Python")
         print(f" {bold(cyan('Q.'))} ❌ {dim('Sair')}\n")
 
@@ -143,6 +147,9 @@ def interactive_menu():
             journal.show_summary()
         elif choice == "0":
             show_stats()
+        elif choice.lower() in ("r", "tree", "arvore", "rpg"):
+            gamification.show_skill_tree()
+
         elif choice.lower() in ("t", "trocar", "track"):
             switch_track_interactive()
         elif choice.lower() in ("q", "sair", "exit"):
@@ -176,6 +183,7 @@ def main():
     subparsers.add_parser("log", help="Cria nova entrada no DevLog")
     subparsers.add_parser("logs", help="Lista entradas do DevLog")
     subparsers.add_parser("stats", help="Exibe estatísticas de progresso")
+    subparsers.add_parser("tree", help="Exibe a Skill Tree RPG, faixas marciais e streaks")
 
     err_parser = subparsers.add_parser("error", help="Decodifica erro críptico do terminal")
     err_parser.add_argument("message", nargs="*", default=[], help="Texto do erro para decodificar")
@@ -204,6 +212,8 @@ def main():
         hunt.start_hunt_session()
     elif args.command == "boss":
         run_boss_checks()
+    elif args.command == "tree":
+        gamification.show_skill_tree()
     elif args.command == "error":
         if args.message:
             msg = " ".join(args.message)
@@ -231,6 +241,7 @@ def main():
         journal.show_summary()
     elif args.command == "stats":
         show_stats()
+
 
 
 if __name__ == "__main__":

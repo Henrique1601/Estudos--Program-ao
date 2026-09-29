@@ -27,11 +27,12 @@ python main.py hunt             # Run Caça-Bugs reverse code review challenges
 python main.py error [msg]      # Decode cryptic terminal error messages into plain Portuguese
 python main.py inspect          # Interactive memory, call stack, and pointer visualizer
 python main.py anki             # Export 20 fundamental mental model flashcards to Anki CSV
+python main.py tree             # Display RPG Skill Tree, martial arts belt, and streaks
 python main.py boss             # Run and evaluate Boss Fights
 python main.py duck             # Run Socratic Duck 5-stage debugging session
 python main.py log              # Create DevLog entry
 python main.py logs             # List DevLog entries
-python main.py stats            # Show progress stats
+python main.py stats            # Show progress stats and player RPG profile
 python main.py --track js_ts    # Switch to JS/TS/Node track
 python main.py --track python   # Switch to Python track
 ```
@@ -62,6 +63,7 @@ charming-shannon/
 │   ├── cli.py                 # Menu and command-line parser
 │   ├── colors.py              # ANSI styling and Windows UTF-8 stdout setup
 │   ├── decoder.py             # Terminal error decrypter & debug checklists
+│   ├── gamification.py        # RPG Skill Tree, belts, XP & Git offline streaks
 │   ├── hints.py               # 3-tier progressive hint database
 │   ├── hunt.py                # Caça-Bugs reverse code review engine
 │   ├── inspector.py           # Memory RAM, call stack & pointer visualizer
@@ -70,6 +72,7 @@ charming-shannon/
 │   ├── runner.py              # Test discovery, execution & git auto-commit
 │   ├── socratic.py            # Socratic duck interview engine
 │   └── tracer.py              # Blind Trace mental compiler engine
+
 ├── exercises/                 # Progressive katas
 │   ├── js_ts/                 # 20 Levels (01 to 20) in TypeScript
 │   │   └── boss_fights/       # 4 Milestone Boss Projects

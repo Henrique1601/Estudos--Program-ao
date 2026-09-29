@@ -40,6 +40,8 @@ Isso abrirá o menu interativo com todas as ferramentas disponíveis.
 | Comando | O que faz |
 | :--- | :--- |
 | `python main.py watch` | **Modo Observador Ativo**: monitora o código, retesta ao salvar e faz Git Auto-Commit ao passar. |
+| `python main.py tree` | **Skill Tree RPG**: árvore de habilidades em 4 ramos, graduação por faixas (Branca à Preta) e streaks offline. |
+| `python main.py stats` | **Estatísticas & Perfil RPG**: mostra nível, XP acumulado, dias seguidos e progresso dos katas/chefões. |
 | `python main.py hunt` | **Caça-Bugs**: treino de Code Review Reverso (encontrar a linha do bug lendo o código). |
 | `python main.py error [msg]` | **Decodificador de Erros**: traduz mensagens crípticas do runtime em explicações humanas e checklists de debug. |
 | `python main.py inspect` | **Visualizador de Memória**: simula no terminal a evolução de variáveis em loops, recursão e ponteiros. |
@@ -51,9 +53,9 @@ Isso abrirá o menu interativo com todas as ferramentas disponíveis.
 | `python main.py train` | **Katas Runner**: executa a suíte e para no primeiro exercício pendente. |
 | `python main.py log` | **Novo DevLog**: formulário guiado para registrar a falsa premissa vs a causa real do bug. |
 | `python main.py logs` | **Ver DevLogs**: lista seus aprendizados e modelos mentais salvos. |
-| `python main.py stats` | **Estatísticas**: mostra porcentagem de katas e chefões concluídos. |
 | `python main.py --track js_ts` | Ativa a trilha **JavaScript / TypeScript / Node.js**. |
 | `python main.py --track python` | Ativa a trilha **Python**. |
+
 
 
 ---
@@ -97,6 +99,7 @@ A cada 5 níveis, você encara um mini-projeto de arquitetura:
 
 O repositório inclui um cofre Obsidian pronto para uso:
 - [INDEX.md](brain/INDEX.md): Ponto de entrada central (Map of Content).
+- [Sistema-de-Faixas-e-Skill-Tree.md](brain/Sistema-de-Faixas-e-Skill-Tree.md): Árvore de habilidades RPG e streaks Git.
 - [Como-Estudar-Sem-IA.md](brain/Como-Estudar-Sem-IA.md): A neurociência do aprendizado e a ilusão de fluência.
 - [Mapa-de-Niveis.md](brain/Mapa-de-Niveis.md): Guia detalhado de todos os 20 níveis e competências.
 - [Boss-Fights-Guia.md](brain/Boss-Fights-Guia.md): Requisitos arquiteturais dos 4 projetos práticos.

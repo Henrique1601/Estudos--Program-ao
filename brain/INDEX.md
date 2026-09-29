@@ -32,6 +32,7 @@ Explore os módulos do seu cérebro de estudos:
 - [[Guia-do-DevLog]]: Metacognição na prática — registrando o que você assumiu errado vs como o runtime realmente opera.
 
 ### 2. Roteiro Passo a Passo
+- [[Sistema-de-Faixas-e-Skill-Tree]]: Árvore de habilidades RPG, graduações por faixas e cálculo de streaks.
 - [[Mapa-de-Niveis]]: Guia detalhado dos 20 níveis progressivos de JavaScript, TypeScript e Node.js.
 - [[Boss-Fights-Guia]]: Os 4 mini-projetos práticos de marco de arquitetura (Níveis 5, 10, 15 e 20).
 
@@ -46,6 +47,8 @@ Explore os módulos do seu cérebro de estudos:
 | :--- | :--- | :--- |
 | `python main.py` | Menu interativo completo | Ponto de partida |
 | `python main.py watch` | Monitoramento em tempo real + Auto-commit | Ao codificar no editor |
+| `python main.py tree` | Skill Tree RPG & Streaks Offline | Visualizar progresso em ramos e faixas |
+| `python main.py stats` | Relatório de progresso e perfil RPG | Acompanhar evolução e XP |
 | `python main.py hunt` | Caça-Bugs (Code Review Reverso) | Treinar leitura e achar erros alheios |
 | `python main.py error` | Decodificador de erros do terminal | Erro críptico no terminal |
 | `python main.py inspect` | Visualizador de Memória RAM & Call Stack | Entender loops, recursão e ponteiros |
@@ -55,7 +58,8 @@ Explore os módulos do seu cérebro de estudos:
 | `python main.py hint [ex] [1..3]` | Dica progressiva socrática | Precisa de luz sem ver código |
 | `python main.py boss` | Bateria de Boss Fights | Testar arquitetura |
 | `python main.py log` | Registrar aprendizado | Após resolver bug difícil |
-| `python main.py stats` | Relatório de progresso | Acompanhar evolução |
+| `python main.py logs` | Ver lições salvas no DevLog | Revisar modelos mentais |
+
 
 
 ---
